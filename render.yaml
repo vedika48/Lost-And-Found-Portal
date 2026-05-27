@@ -1,0 +1,18 @@
+services:
+  - type: web
+    name: campusfind
+    runtime: python
+    buildCommand: pip install -r backend/requirements.txt
+    startCommand: uvicorn backend.main:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: DATABASE_PATH
+        value: campusfind.db # For free tier (resets on restart). Change to /data/campusfind.db if using a disk.
+      - key: PYTHON_VERSION
+        value: 3.10.0
+
+    # UNCOMMENT the following section if you upgrade to Render's Starter (paid) tier
+    # to enable permanent database persistence.
+    # disk:
+    #   name: campusfind-data
+    #   mountPath: /data
+    #   sizeGB: 1
